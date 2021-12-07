@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block page_title %}
+    Mails
+{% endblock %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/aside.css' %}">
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="aside">
+        <div class="menu_list">
+            <a href="{% url 'mail:create_mail' %}">Добавить ящик</a>
+            <div class="bracker"></div>
+        </div>
+    </div>
+
+    {% for mails in mails %}
+
+    {% endfor %}
+
+{% endblock %}

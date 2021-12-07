@@ -1,0 +1,18 @@
+.aside {
+    background-color: black;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+}
+
+.menu_list {
+    padding: 20px;
+}
+
+.bracker {
+    color: white;
+    width: 100px;
+    height: 100px;
+}

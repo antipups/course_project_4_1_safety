@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ page_title }}
+{% endblock %}
+
+
+{% block head %}
+{#    <link rel="stylesheet" href="{% static 'css/form.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'css/select.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'css/users/auth.css' %}">#}
+{#    <script src="{% static 'js/form.js' %}"></script>#}
+{#    <script src="{% static 'js/select.js' %}"></script>#}
+{#    <script src="{% static 'js/multiselect-dropdown.js' %}"></script>#}
+{% endblock %}
+
+
+{% block body %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="row">
+                <div class="title_row">
+                    {{ field.label }}
+                </div>
+                <div class="field_value {% if field.errors %}error_field{% endif %}">
+                    {{ field }}
+                </div>
+                <div class="errors">
+                    {{ field.errors }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="control_buttons">
+{#            <a href="{% url 'users_work:registration' %}" class="alternative">Sign Up</a>#}
+            <input type="submit">
+        </div>
+    </form>
+
+{% endblock %}
