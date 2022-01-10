@@ -1,5 +1,6 @@
 from imap_tools import MailBox, AND
 from mail.services.config import Servers, MaxOutMessages
+import base64
 
 
 def get_server(email: str) -> str:
@@ -14,18 +15,23 @@ def get_messages(login: str, password: str, folder: str) -> list:
         if folder:
             mail.folder.set(folder=folder)
 
-        for message in mail.fetch(limit=MaxOutMessages):
-            attachs = [{'name': attach.filename, 'content': attach.payload} for attach in message.attachments]
+        for message in mail.fetch(limit=MaxOutMessages,
+                                  reverse=True,
+                                  mark_seen=False):
+            attachs = [{'name': attach.filename,
+                        'content': base64.b64encode(attach.payload).decode()}
+                       for attach in message.attachments]
+
             messages.append({'subject': message.subject,
                              'date': message.date_str,
                              'body': message.text,
                              'from': message.from_,
                              'flags': message.flags,
-                             'id': int(message.uid)
-                             # 'attachments': attachs,
+                             'id': int(message.uid),
+                             'attachments': attachs,
                              })
 
-    return messages[::-1]
+    return messages
 
 
 def get_folders(login: str, password: str) -> tuple:

@@ -2,7 +2,9 @@ from django.urls import path, include
 from mail import views, controllers
 
 urlpatterns = [
-    path('get_messages', controllers.get_messages),
-    path('get_folders', controllers.get_folders)
+    path('messages', controllers.get_messages),
+    path('folders', controllers.get_folders),
+    path('keys', controllers.get_keys),
+    path('set_keys', controllers.set_keys),
 ]
 
