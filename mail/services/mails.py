@@ -25,7 +25,7 @@ def get_messages(login: str, password: str, folder: str) -> list:
             messages.append({'subject': message.subject,
                              # 'date': "",
                              'date': message.date_str,
-                             'body': message.html,
+                             'body': message.html if message.html else message.text,
                              'from': message.from_,
                              'flags': message.flags[:1],
                              'id': int(message.uid),
