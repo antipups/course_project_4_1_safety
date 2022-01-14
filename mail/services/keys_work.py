@@ -21,6 +21,8 @@ def get_keys(from_: str, to_: str) -> dict | bool:
 
 
 def set_keys(from_: str, to_: str, privKey: str, pubKey: str, tripleDesKey: str):
+    if keys := KeysStorage.objects.filter(from_email=from_, to_email=to_):
+        keys[0].delete()
     KeysStorage(from_email=from_,
                 to_email=to_,
                 privkey=privKey,
